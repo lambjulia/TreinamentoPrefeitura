@@ -51,11 +51,11 @@
         </div>
         <div class="col-sm-3">
             <div class="card text-center">
-                <img class="card-img-top" src="{{ URL::to('/imagens/images.png') }}" alt="">
+                <img class="card-img-top" src="{{ URL::to('/imagens/pdf.png') }}" alt="">
                 <div class="card-body">
-                    <h4 class="card-title">PDF Exemplo</h4>
+                    <h4 class="card-title">PDF Relatório de Protocolos</h4>
                     <p class="card-text"></p>
-                    <a href="{{ url('pdf') }}" class="btn btn-primary stretched-link">Link lista</a>
+                    <a href="{{ url('pdf/{id') }}" class="btn btn-primary stretched-link">Link PDF</a>
                 </div>
             </div>
         </div>

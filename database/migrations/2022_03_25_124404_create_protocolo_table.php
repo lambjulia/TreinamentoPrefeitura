@@ -14,11 +14,13 @@ class CreateProtocoloTable extends Migration
     public function up()
     {
         Schema::create('protocolos', function (Blueprint $table) {
-            $table->increments('numeroprot')->nullable();  
+            $table->bigIncrements('id');  
             $table->string('contribuinte')->nullable(); 
             $table->string('descricao')->nullable();
             $table->string('data')->nullable();
             $table->string('prazo')->nullable();
+            $table->unsignedBigInteger('pessoa_id');
+            $table->foreign('pessoa_id')->references('id')->on('pessoas');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateProtocoloTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('protocolo');
+        Schema::dropIfExists('protocolos');
     }
 }

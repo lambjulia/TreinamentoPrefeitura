@@ -17,12 +17,12 @@
                 <input type="text" name="prazo"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->prazo }}"><br>
 
             </tr>
-            <form method="GET" action="/pdf/{numeroprot}" enctype="multipart/form-data">
+            <form method="GET" action="/pdf/{id}" enctype="multipart/form-data">
                 <div class="form-group">
                  
                  <div class="control">
                  
-                     <button type="submit" class="btn btn-primary">Generate PDF File</button>
+                     <button type="submit" class="btn btn-primary">Download PDF Relatórios</button>
                  
                  </div>
                  

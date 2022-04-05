@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<form action="/saveprot" method="POST" class="form-horizontal" id="formProduto">
+<form action="/saveprot" method="POST" class="form-horizontal" id="formProduto" enctype="multipart/form-data">
     @csrf               
     @method('POST')
     
@@ -53,6 +53,14 @@
                     </option>
                     @endforeach
                 </select> 
+
+        
+                <div class="form-group">
+                    <input type="file" name="arquivos" class="custom-file-unput" id="arquivos" multiple >
+                   
+                    
+                </div>
+              
         </div>
            
         <div class="card-footer">

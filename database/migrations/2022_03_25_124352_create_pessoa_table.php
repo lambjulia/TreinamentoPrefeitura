@@ -14,7 +14,7 @@ class CreatePessoaTable extends Migration
     public function up()
     {
         Schema::create('pessoas', function (Blueprint $table) {
-            $table->increments('id')->nullable();
+            $table->bigIncrements('id')->nullable();
             $table->string('nome')->nullable();
             $table->string('data_de_nascimento')->nullable();
             $table->string('cpf')->unique();
@@ -35,6 +35,6 @@ class CreatePessoaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pessoa');
+        Schema::dropIfExists('pessoas');
     }
 }

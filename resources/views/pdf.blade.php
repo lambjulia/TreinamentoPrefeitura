@@ -21,41 +21,35 @@
 <body>
     <header>
         <div style="align: center">
-            <img width="100" src="{{ URL::to('/imagens/logo.png') }}"
-               />
+            
             
                 <h4 style="margin-top: 30px">Prefeitura Municipal de São Leopoldo<br /></h4>
                 <h4>Secretária Municipal de Desenvolvimento Social</h4>
                 <h4>Relatório de protocolo</h4>
         </div>
     </header>
-    <div style="align: center">
-        <h4 style="margin-top: 50px"><strong></strong><br /></h4>
+    <div class="container-fluid no-padding table-responsive-sm" style="align: center">
+        <table class="table table-striped nowrap" style="width:100%" id="prefeitura">
+            <thead style="align: center">
+                <tr>
+                    <th>Contribuinte</th>
+                    <th>Data</th>
+                    <th>Descrição</th>
+    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($protocolo as $protocolo)
+                <tr>
+                    <td>{{ $protocolo->contribuinte }}</td>
+                    <td>{{ $protocolo->data }}</td>
+                    <td>{{ $protocolo->descricao }} </td>
+    
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    <table class="table">
-        <thead style="align: center">
-            <tr>
-                
-                <th>Contribuinte</th>
-                <th>Descrição</th>
-                <th>Data</th>
-                
-               
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($protocolo as $protocolo)
-            <tr>
-                
-                <td>{{$protocolo->contribuinte}}</td>
-                <td>{{$protocolo->descricao}}</td>
-                <td>{{$protocolo->data}}</td>
-                
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
 </body>
 
 </html>

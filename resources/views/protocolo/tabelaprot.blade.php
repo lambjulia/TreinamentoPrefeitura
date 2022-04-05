@@ -33,18 +33,18 @@
         <tbody>
             @foreach ($protocolo as $protocolo)
             <tr>
-                <td>{{ $protocolo->numeroprot }}</td>
+                <td>{{ $protocolo->id }}</td>
                 <td>{{ $protocolo->contribuinte }}</td>
                 <td>{{ $protocolo->descricao }} </td>
                 
                 <td>
-                    <a href="{{ route('showprot', $protocolo->numeroprot) }}" class="btn btn-primary" style="float: right">Ver</a>
+                    <a href="{{ route('showprot', $protocolo->id) }}" class="btn btn-primary" style="float: right">Ver</a>
                 </td>
                 <td>
-                    <a href="{{ route('editprot', $protocolo->numeroprot) }}" class="btn btn-success" style="float: right">Editar</a>
+                    <a href="{{ route('editprot', $protocolo->id) }}" class="btn btn-success" style="float: right">Editar</a>
                 </td>
                 <td>
-                    <form action="/delete/{{ $protocolo->numeroprot }}" method="POST">
+                    <form action="/delete/{{ $protocolo->id }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"  class="btn btn-danger" style="float: right"  onclick="return confirm('Deseja mesmo deletar?');" ><i class='fa fa-trash'></i> Delete</a></button>

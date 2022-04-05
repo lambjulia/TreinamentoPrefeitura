@@ -37,18 +37,19 @@ Route::post('/saveprot', 'ProtocoloController@store')->name('saveprot')->middlew
 
 Route::get('/tabelaprotocolo', 'ProtocoloController@index')->name('tabelaprotocolo')->middleware('auth'); 
 
-Route::get('/cadastroprotocolo/ver/{numeroprot}', 'ProtocoloController@show')->name('showprot')->middleware('auth');
+Route::get('/cadastroprotocolo/ver/{id}', 'ProtocoloController@show')->name('showprot')->middleware('auth');
 
-Route::get('/cadastroprotocolo/edit/{numeroprot}', 'ProtocoloController@edit')->name('editprot')->middleware('auth');
+Route::get('/cadastroprotocolo/edit/{id}', 'ProtocoloController@edit')->name('editprot')->middleware('auth');
 
-Route::post('/cadastroprotocolo/{numeroprot}', 'ProtocoloController@update')->name('alterar_protocolo')->middleware('auth');
+Route::post('/cadastroprotocolo/{id}', 'ProtocoloController@update')->name('alterar_protocolo')->middleware('auth');
 
-Route::delete('/deleteprot/{numeroprot}',  'ProtocoloController@delete')->middleware('auth');
+Route::delete('/deleteprot/{id}',  'ProtocoloController@delete')->middleware('auth');
 
 Route::get('/searchprot', 'ProtocoloController@searchprot')->middleware('auth');
 
-Route::get('/pdf/{numeroprot}', 'ProtocoloController@generatePDF');
+Route::get('/pdf/{id}', 'ProtocoloController@generatePDF');
 
+Route::post('upload', 'ProtocoloController@upload');
 
 
 

@@ -8,6 +8,7 @@ use App\User;
 use App\Protocolo;
 use App\Pessoa;
 use PDF;
+use App\arquivo;
 
 
 class ProtocoloController extends Controller
@@ -64,27 +65,34 @@ class ProtocoloController extends Controller
             $protocolo->descricao = $request->input('descricao');
             $protocolo->data = $request->input('data');
             $protocolo->prazo = $request->input('prazo');
-
-           
-        
+          
             $protocolo->save();
+
+            $arquivos = new Arquivo();
+
+            if(!is_null($request->file('arquivos'))) {
+                $arquivos->arquivo = $request->file('arquivos')->store('arquivo/'.$protocolo->id);
+                $arquivos->tipo = 'arquivos';
+                $arquivos->protocolo_id = $protocolo->id;
+                $arquivos->save();
+              }
 
             return redirect('/tabelaprotocolo')->with('success','Protocolo cadastrado com sucesso!');;
     }
 
-    public function show ($numeroprot) 
+    public function show ($id) 
     {
         $protocolo = Protocolo::all();
-        $protocolo = Protocolo::find($numeroprot);
-        return view ('protocolo/showprot', ['protocolo' => $protocolo, 'numeroprot' => $numeroprot]);
+        $protocolo = Protocolo::find($id);
+        return view ('protocolo/showprot', ['protocolo' => $protocolo, 'id' => $id]);
     }
 
 
 
-    public function edit($numeroprot) 
+    public function edit($id) 
     {
        
-        $protocolo = Protocolo::find($numeroprot);
+        $protocolo = Protocolo::find($id);
       
         $pessoa = Pessoa::all();
 
@@ -93,10 +101,10 @@ class ProtocoloController extends Controller
     }
 
 
-    public function update(Request $request, $numeroprot)
+    public function update(Request $request, $id)
     {
         
-      $protocolo = Protocolo::findOrFail($numeroprot);
+      $protocolo = Protocolo::findOrFail($id);
       $pessoa = Pessoa::all();
         $protocolo->update([
           'contribuinte' => $request -> contribuinte,
@@ -113,9 +121,9 @@ class ProtocoloController extends Controller
         
     }
 
-    public function delete($numeroprot)
+    public function delete($id)
     {
-        $protocolo = protocolo::find($numeroprot);
+        $protocolo = protocolo::find($id);
         $protocolo->delete();
         return redirect('/tabelaprotocolo')->with('warning','Protocolo excluido com sucesso!');;
     }
@@ -136,6 +144,13 @@ class ProtocoloController extends Controller
         
         $pdf = PDF::loadView('pdf', compact('protocolo'))->setOptions(['defaultFont' => 'sans-serif']);
   
-        return $pdf->setPaper('a4')->stream('relatorio.pdf');
+        return $pdf->setPaper('a4')->download('relatorio.pdf');
     }
+
+    public function upload(Request $request) {
+
+        $request->file('arquivo')->store('protocolos');
+        var_dump($request->file('arquivo') ,$request->all);
+    }
+       
 }

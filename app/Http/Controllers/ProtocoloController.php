@@ -9,6 +9,7 @@ use App\Protocolo;
 use App\Pessoa;
 use PDF;
 use App\arquivo;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProtocoloController extends Controller
@@ -44,7 +45,7 @@ class ProtocoloController extends Controller
     public function create()
     {
         $pessoa = Pessoa::all();
-        return view ('prot.create', compact("pessoa"));
+        return view ('prot.create', ['pessoa' => $pessoa, 'id' => $id]);
     }
 
     /**
@@ -59,12 +60,16 @@ class ProtocoloController extends Controller
 
 
     public function store(Request $request)
-    {
-            $protocolo= new Protocolo();
-            $protocolo->contribuinte = $request->input('contribuinte');
+    {       
+            //dd($request);
+            
+            $pessoa = Pessoa::all(); 
+            $protocolo= new Protocolo($request->all());
             $protocolo->descricao = $request->input('descricao');
             $protocolo->data = $request->input('data');
-            $protocolo->prazo = $request->input('prazo');
+            $protocolo->prazo = $request->input('prazo');  
+            $protocolo = Pessoa::where('id', 'pessoa_id')->first();
+            
           
             $protocolo->save();
 
@@ -77,7 +82,9 @@ class ProtocoloController extends Controller
                 $arquivos->save();
               }
 
-            return redirect('/tabelaprotocolo')->with('success','Protocolo cadastrado com sucesso!');;
+             
+
+            return redirect('/tabelaprotocolo', ['pessoa' => $pessoa, 'id' => $id])->with('success','Protocolo cadastrado com sucesso!');;
     }
 
     public function show ($id) 
@@ -107,7 +114,7 @@ class ProtocoloController extends Controller
       $protocolo = Protocolo::findOrFail($id);
       $pessoa = Pessoa::all();
         $protocolo->update([
-          'contribuinte' => $request -> contribuinte,
+          'pessoa_id' => $request -> pessoa_id,
           'descricao' => $request -> descricao,
           'data' => $request -> data,
           'prazo' => $request -> prazo,
@@ -132,7 +139,7 @@ class ProtocoloController extends Controller
         $search = $_GET['query'];
        $protocolo = Protocolo::where('descricao', 'LIKE', '%' .$search. '%')
        ->orWhere('data', 'LIKE', '%' .$search. '%')
-       ->orWhere('contribuinte', 'LIKE', '%' .$search. '%')
+       ->orWhere('pessoa_id', 'LIKE', '%' .$search. '%')
        ->orWhere('prazo', 'LIKE', '%' .$search. '%')->get();
 
         return view('protocolo/tabelaprot', compact('protocolo'));

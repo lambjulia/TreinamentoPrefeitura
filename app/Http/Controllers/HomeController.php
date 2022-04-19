@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Audit;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,4 +27,11 @@ class HomeController extends Controller
         
         return view('welcome');
     }
+
+    public function audit()
+    {
+        $audits = Audit::all();
+        return View('auditoria', compact('audits'));
+    }
+
 }

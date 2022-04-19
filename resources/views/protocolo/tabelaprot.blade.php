@@ -25,7 +25,7 @@
         <thead style="align: center">
             <tr>
                 <th>Numero de Protocolo</th>
-                <th>Contribuinte</th>
+                <th>pessoa_id</th>
                 <th>Descrição</th>
 
             </tr>
@@ -34,7 +34,7 @@
             @foreach ($protocolo as $protocolo)
             <tr>
                 <td>{{ $protocolo->id }}</td>
-                <td>{{ $protocolo->contribuinte }}</td>
+                <td>{{ $protocolo->pessoa_id }}</td>
                 <td>{{ $protocolo->descricao }} </td>
                 
                 <td>

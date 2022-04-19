@@ -14,10 +14,10 @@ class CreatePessoaTable extends Migration
     public function up()
     {
         Schema::create('pessoas', function (Blueprint $table) {
-            $table->bigIncrements('id')->nullable();
+            $table->bigIncrements('id');
             $table->string('nome')->nullable();
             $table->string('data_de_nascimento')->nullable();
-            $table->string('cpf')->unique();
+            $table->string('cpf');
             $table->string('sexo')->nullable();
             $table->string('cidade')->nullable();
             $table->string('bairro')->nullable();

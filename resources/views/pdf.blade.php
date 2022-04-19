@@ -32,7 +32,7 @@
         <table class="table table-striped nowrap" style="width:100%" id="prefeitura">
             <thead style="align: center">
                 <tr>
-                    <th>Contribuinte</th>
+                    <th>pessoa_id</th>
                     <th>Data</th>
                     <th>Descrição</th>
     
@@ -41,7 +41,7 @@
             <tbody>
                 @foreach ($protocolo as $protocolo)
                 <tr>
-                    <td>{{ $protocolo->contribuinte }}</td>
+                    <td>{{ $protocolo->pessoa_id }}</td>
                     <td>{{ $protocolo->data }}</td>
                     <td>{{ $protocolo->descricao }} </td>
     

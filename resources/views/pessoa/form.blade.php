@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script src="{{asset('js/validation/validationinfo.js')}}"></script>
+
 <form action="/store" method="POST" class="form-horizontal" id="formProduto">
     @csrf               
     @method('POST')
@@ -20,7 +22,7 @@
                 <label for="nome" class="control-label">Nome: *</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo"
-                        value="{{isset($cras->nome) ? $cras->nome : old('nome') }}" required>
+                        value="{{isset($cras->nome) ? $cras->nome : old('nome') }}">
                 </div>
             </div>
 
@@ -30,7 +32,7 @@
                 <label for="data_de_nascimento" class="control-label">Data de nascimento: *</label>
                 <div class="input-group">
                     <input type="date" class="form-control date" id="data_de_nascimento" name="data_de_nascimento"
-                        value="{{isset($cras->data_de_nascimento) ? $cras->data_de_nascimento : old('data_de_nascimento') }}" required>
+                        value="{{isset($cras->data_de_nascimento) ? $cras->data_de_nascimento : old('data_de_nascimento') }}" >
                 </div>
             </div>
 
@@ -40,7 +42,7 @@
                     <label for="cpf" class="control-label">CPF: *</label>
                     <div class="input-group ">
                         <input type="text" class="form-control cpf" name="cpf" id="cpf"
-                            value="{{isset($cras->cpf) ? $cras->cpf : old('cpf') }}" required
+                            value="{{isset($cras->cpf) ? $cras->cpf : old('cpf') }}" 
                             placeholder="000.000.000-00" />
                     </div>
                 </div>

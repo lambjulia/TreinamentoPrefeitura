@@ -15,11 +15,10 @@ class CreateProtocoloTable extends Migration
     {
         Schema::create('protocolos', function (Blueprint $table) {
             $table->bigIncrements('id');  
-            $table->string('contribuinte')->nullable(); 
             $table->string('descricao')->nullable();
             $table->string('data')->nullable();
             $table->string('prazo')->nullable();
-            $table->unsignedBigInteger('pessoa_id');
+            $table->unsignedBigInteger('pessoa_id')->unsigned;
             $table->foreign('pessoa_id')->references('id')->on('pessoas');
             $table->timestamps();
         });

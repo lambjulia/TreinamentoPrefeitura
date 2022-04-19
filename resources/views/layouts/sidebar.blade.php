@@ -79,8 +79,8 @@
                     <div class="expandable collapse" id="sidebarLayouts2">
                         <ul class="nav nav-collapse">
                             <li class="">
-                                <a href="#">
-                                    <span class="sub-item">Página 1</span>
+                                <a href="{{ url('auditoria') }}">
+                                    <span class="sub-item">Auditoria</span>
                                 </a>
                             </li>
                             <li class="">

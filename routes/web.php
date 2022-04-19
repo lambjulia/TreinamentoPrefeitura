@@ -47,9 +47,11 @@ Route::delete('/deleteprot/{id}',  'ProtocoloController@delete')->middleware('au
 
 Route::get('/searchprot', 'ProtocoloController@searchprot')->middleware('auth');
 
-Route::get('/pdf/{id}', 'ProtocoloController@generatePDF');
+Route::get('/pdf/{id}', 'ProtocoloController@generatePDF')->middleware('auth');
 
-Route::post('upload', 'ProtocoloController@upload');
+Route::post('upload', 'ProtocoloController@upload')->middleware('auth');
+
+Route::get('/auditoria','HomeController@audit')->name('audit')->middleware('auth');
 
 
 

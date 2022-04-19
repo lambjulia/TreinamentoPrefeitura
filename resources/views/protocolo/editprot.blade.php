@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <select required="required" style="background-color: #white" class="form-control"  name="contribuinte" id="">
+                <select required="required" style="background-color: #white" class="form-control"  name="pessoa_id" id="">
                     <option  value="">Selecione uma pessoa</option>    
                     @foreach ($pessoa as $p)
                     <option  value="{{ $p->nome }}"> 

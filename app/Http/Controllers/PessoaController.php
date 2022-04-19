@@ -51,7 +51,7 @@ class PessoaController extends Controller
     {
 
         
-             $pessoa = new Pessoa();
+            $pessoa = new Pessoa();
             $pessoa->nome = $request->input('nome');
             $pessoa->data_de_nascimento = $request->input('data_de_nascimento');
             $pessoa->cpf = $request->input('cpf');
@@ -62,6 +62,11 @@ class PessoaController extends Controller
             $pessoa->numero = $request->input('numero');
             $pessoa->complemento = $request->input('complemento');
     
+            $this->validate($request, [
+            
+                'cpf' => 'required|cpf',
+
+            ]);
 
             $pessoa->save();
 

@@ -25,7 +25,7 @@
         <thead style="align: center">
             <tr>
                 <th>Numero de Protocolo</th>
-                <th>pessoa_id</th>
+                <th>ID</th>
                 <th>Descrição</th>
 
             </tr>

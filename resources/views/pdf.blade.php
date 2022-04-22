@@ -32,7 +32,7 @@
         <table class="table table-striped nowrap" style="width:100%" id="prefeitura">
             <thead style="align: center">
                 <tr>
-                    <th>pessoa_id</th>
+                    <th>ID</th>
                     <th>Data</th>
                     <th>Descrição</th>
     

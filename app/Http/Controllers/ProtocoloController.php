@@ -84,7 +84,7 @@ class ProtocoloController extends Controller
 
              
 
-            return redirect('/tabelaprotocolo', ['pessoa' => $pessoa, 'id' => $id])->with('success','Protocolo cadastrado com sucesso!');;
+            return redirect('/tabelaprotocolo', compact('pessoa', 'protocolo'))->with('success','Protocolo cadastrado com sucesso!');;
     }
 
     public function show ($id) 

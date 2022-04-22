@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<form action="/saveprot" method="POST" class="form-horizontal" id="formProduto" enctype="multipart/form-data">
+<form action="{{ route('saveprot')}}" method="POST" class="form-horizontal" id="formProduto" enctype="multipart/form-data">
     @csrf               
     @method('POST')
     
@@ -65,7 +65,7 @@
            
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a class="btn btn-secondary" href="#">Cancelar</a>
+            <a class="btn btn-secondary" href="{{ url('tabelaprotocolo') }}">Cancelar</a>
         </div>
     </div>
 
@@ -76,84 +76,6 @@
 </div>
 </div>
 
-<script>
-    (function() {
-        validate.extend(validate.validators.datetime, {
-        parse: function(value, options) {
-          return +moment.utc(value);
-        },
-       
-        format: function(value, options) {
-          var format = options.dateOnly ? "DD-MM-YYYY" : "DD-MM-YYYY hh:mm:ss";
-          return moment.utc(value).format(format);
-        }
-      });
 
-      var constraints = {
-        nome: 
-          presence: true,
-          length: {
-            minimum: 5,
-            maximum: 100
-          },
-        },
-
-        var form = document.querySelector("form#main");
-      form.addEventListener("submit", function(ev) {
-        ev.preventDefault();
-        handleFormSubmit(form);
-      });
-
-      // Hook up the inputs to validate on the fly
-      var inputs = document.querySelectorAll("input, textarea, select")
-      for (var i = 0; i < inputs.length; ++i) {
-        inputs.item(i).addEventListener("change", function(ev) {
-          var errors = validate(form, constraints) || {};
-          showErrorsForInput(this, errors[this.nome])
-        });
-      }
-
-      function handleFormSubmit(form, input) {
-        // validate the form against the constraints
-        var errors = validate(form, constraints);
-        // then we update the form to reflect the results
-        showErrors(form, errors || {});
-        if (!errors) {
-          showSuccess();
-        }
-      }
-
-      // Updates the inputs with the validation errors
-      function showErrors(form, errors) {
-        // We loop through all the inputs and show the errors for that input
-        _.each(form.querySelectorAll("input[nome], select[nome]"), function(input) {
-          // Since the errors can be null if no errors were found we need to handle
-          // that
-          showErrorsForInput(input, errors && errors[input.name]);
-        });
-      }
-
-      // Shows the errors for a specific input
-      function showErrorsForInput(input, errors) {
-        // This is the root of the input
-        var formGroup = closestParent(input.parentNode, "form-group")
-          // Find where the error messages will be insert into
-          , messages = formGroup.querySelector(".messages");
-        // First we remove any old messages and resets the classes
-        resetFormGroup(formGroup);
-        // If we have errors
-        if (errors) {
-          // we first mark the group has having errors
-          formGroup.classList.add("has-error");
-          // then we append all the errors
-          _.each(errors, function(error) {
-            addError(messages, error);
-          });
-        } else {
-          // otherwise we simply mark it as success
-          formGroup.classList.add("has-success");
-        }
-      }
-</script>
 </body>
 </html>

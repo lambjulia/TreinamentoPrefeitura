@@ -116,7 +116,8 @@
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a class="btn btn-secondary" href="#">Cancelar</a>
+            <a class="btn btn-secondary" href="{{ url('tabela') }}">Cancelar</a>
+        </div>">Cancelar</a>
         </div>
     </div>
 

@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/saveprot" method="POST" class="form-horizontal" id="formProduto">
+<form action="{{ route('alterar_cadastro', $pessoa->id) }}" method="POST" class="form-horizontal" id="formProduto">
     @csrf               
     @method('POST')
     

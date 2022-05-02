@@ -13,6 +13,13 @@
         <div class="container col-11">
             <input type="hidden" id="id" class="form-control">
 
+            @if ($errors->any())
+            <div class='alert alert-danger'>
+             @foreach ( $errors->all() as $error )
+              <p>{{ $error }}</p>
+             @endforeach
+            </div>
+           @endif
             
             {{--- Formulario Nome ---}}
 
@@ -20,7 +27,7 @@
                 <label for="descricao" class="control-label">Descrição: *</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição"
-                        value="{{isset($cras->descricao) ? $cras->descricao : old('descricao') }}" required>
+                        value="{{isset($cras->descricao) ? $cras->descricao : old('descricao') }}" >
                 </div>
             </div>
 
@@ -30,7 +37,7 @@
                 <label for="data" class="control-label">Data: *</label>
                 <div class="input-group">
                     <input type="date" class="form-control date" id="data" name="data"
-                        value="{{isset($cras->data) ? $cras->data : old('data') }}" required>
+                        value="{{isset($cras->data) ? $cras->data : old('data') }}">
                 </div>
             </div>
 
@@ -40,7 +47,7 @@
                     <label for="prazo" class="control-label">Prazo: *</label>
                     <div class="input-group ">
                         <input type="text" class="form-control cpf" name="prazo" id="prazo" placeholder="Prazo"
-                            value="{{isset($cras->prazo) ? $cras->prazo : old('prazo') }}" required
+                            value="{{isset($cras->prazo) ? $cras->prazo : old('prazo') }}" 
                              />
                     </div>
                 </div>
@@ -48,7 +55,7 @@
                 <select required="required" style="background-color: #white" class="form-control"  name="pessoa_id" id="pessoa_id">
                     <option  value="">Selecione uma pessoa</option>    
                     @foreach ($pessoa as $p)
-                    <option  value="{{ $p->nome }}"> 
+                    <option  value="{{ $p->id }}"> 
                     {{ $p->nome }}
                     </option>
                     @endforeach

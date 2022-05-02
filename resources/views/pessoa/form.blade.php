@@ -15,7 +15,13 @@
         <div class="container col-11">
             <input type="hidden" id="id" class="form-control">
 
-            
+            @if ($errors->any())
+ <div class='alert alert-danger'>
+  @foreach ( $errors->all() as $error )
+   <p>{{ $error }}</p>
+  @endforeach
+ </div>
+@endif
             {{--- Formulario Nome ---}}
 
             <div class="form-group">
@@ -46,21 +52,31 @@
                             placeholder="000.000.000-00" />
                     </div>
                 </div>
-
-                {{--- Formulario sexo Cras ---}}
-
-                <div class="form-group">
-                    <label for="sexo" class="control-label">Sexo:</label>
-                    <div class="input-group">
-                        <input type="radio" name="sexo" required="required" value="masculino" id="masculino"><br /> 
-                        <label style="font-size:medium" for="masculino">Masculino</label>
-                        <input type="radio" name="sexo" required="required" value="feminino" id="feminino"><br />
-                        <label style="font-size: medium" for="feminino">Feminino</label>
-                        
-                   
-                </div>
             </div>
-        </div>
+            
+                {{--- Formulario sexo Cras ---}}
+               
+                <div class="col-md-6">
+                    <div class="form-group row">
+                   <label class="col-md-1 label-control" for="sexo">Sexo :</label>
+
+                   <div class="col-md-8" id="sexo" >
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" required="required" value="masculino" id="masculino"><br>
+                    <label class="form-check-label" for="masculino">Masculino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input  class="form-check-input" type="radio" name="sexo" required="required" value="feminino" id="feminino"><br>
+                    <label class="form-check-label" for="feminino">Feminino</label>
+                </div>
+
+                    </div>
+                            </div>
+                        </div>
+                
+                
+        
             {{--- Formulario cidade Cras ---}}
 
             <div class="form-group">
@@ -117,7 +133,7 @@
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a class="btn btn-secondary" href="{{ url('tabela') }}">Cancelar</a>
-        </div>">Cancelar</a>
+        </div>
         </div>
     </div>
 

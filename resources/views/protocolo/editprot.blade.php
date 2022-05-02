@@ -32,7 +32,7 @@
                 <label for="data" class="control-label">Data: *</label>
                 <div class="input-group">
                     <input type="date" class="form-control date" id="data" name="data"
-                        value=" {{ $protocolo->data }}"  required>
+                    value="{{isset($protocolo->data) ? date('Y-m-d',strtotime($protocolo->data)) : old('data')}}"  required>
                 </div>
             </div>
 
@@ -48,8 +48,8 @@
                 </div>
 
                 <select required="required" style="background-color: #white" class="form-control"  name="pessoa_id" id="">
-                    <option  value="">Selecione uma pessoa</option>    
                     @foreach ($pessoa as $p)
+                    <option  value="{{ $p->nome }}">{{ $p->nome }}</option>   
                     <option  value="{{ $p->nome }}"> 
                     {{ $p->nome }}
                     </option>

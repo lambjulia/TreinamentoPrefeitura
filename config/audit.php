@@ -25,11 +25,11 @@ return [
     */
 
     'user' => [
-        'morph_prefix' => 'user',
-        'guards'       => [
+        'guards' => [
             'web',
             'api',
         ],
+        
     ],
 
     /*
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'timestamps' => false,
+    'timestamps' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -133,5 +133,5 @@ return [
     |
     */
 
-    'console' => false,
+    'console' => true,
 ];

@@ -25,17 +25,20 @@
         <thead style="align: center">
             <tr>
                 <th>Numero de Protocolo</th>
-                <th>ID</th>
                 <th>Descrição</th>
+                <th>Nome</th>
+            
 
             </tr>
         </thead>
         <tbody>
             @foreach ($protocolo as $protocolo)
             <tr>
-                <td>{{ $protocolo->id }}</td>
                 <td>{{ $protocolo->pessoa_id }}</td>
                 <td>{{ $protocolo->descricao }} </td>
+                <td>{{ $protocolo->pessoa->nome }}</td>
+                
+                
                 
                 <td>
                     <a href="{{ route('showprot', $protocolo->id) }}" class="btn btn-primary" style="float: right">Ver</a>
@@ -53,6 +56,18 @@
 
             </tr>
             @endforeach
+            <form method="GET" action="/pdf/{id}" enctype="multipart/form-data">
+                <div class="form-group">
+                 
+                 <div class="control">
+                 
+                     <button type="submit" class="btn btn-primary">Download PDF Relatórios</button>
+                 
+                 </div>
+                 
+                </div>
+                 
+                </form> 
         </tbody>
     </table>
 </div>

@@ -16,7 +16,7 @@ class CreateProtocoloTable extends Migration
         Schema::create('protocolos', function (Blueprint $table) {
             $table->bigIncrements('id');  
             $table->string('descricao')->nullable();
-            $table->string('data')->nullable();
+            $table->date('data')->nullable();
             $table->string('prazo')->nullable();
             $table->unsignedBigInteger('pessoa_id')->unsigned;
             $table->foreign('pessoa_id')->references('id')->on('pessoas');

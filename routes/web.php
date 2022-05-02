@@ -53,6 +53,7 @@ Route::post('upload', 'ProtocoloController@upload')->middleware('auth');
 
 Route::get('/auditoria','HomeController@audit')->name('audit')->middleware('auth');
 
+Route::get('/pdfview', 'ProtocoloController@pdf');
 
 
 Auth::routes();

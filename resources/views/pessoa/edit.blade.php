@@ -32,7 +32,7 @@
                 <label for="data_de_nascimento" class="control-label">Data de nascimento: *</label>
                 <div class="input-group">
                     <input type="date" class="form-control date" id="data_de_nascimento" name="data_de_nascimento"
-                    value =" {{ $pessoa->data_de_nascimento }}" required>
+                    value="{{isset($pessoa->data_de_nascimento) ? date('Y-m-d',strtotime($pessoa->data_de_nascimento)) : old('data_de_nascimento')}}" required>
                 </div>
             </div>
 
@@ -42,26 +42,35 @@
                     <label for="cpf" class="control-label">CPF: *</label>
                     <div class="input-group ">
                         <input type="text" class="form-control cpf" name="cpf" id="cpf"
-                        value =" {{ $pessoa->cpf }}" required
+                            value="{{isset($pessoa->cpf) ? $pessoa->cpf : old('cpf') }}" 
                             placeholder="000.000.000-00" />
                     </div>
                 </div>
-
-                {{--- Formulario sexo Cras ---}}
-
-                <div class="form-group col-md-6">
-                    <label for="sexo" class="control-label">Sexo:</label>
-                    <div class="input-group">
-                        
-                        <input type="radio" name="sexo" required="required" value="masculino" id="masculino"><br /> 
-                        <label style="font-size:medium" for="masculino">Masculino</label>
-                        <input type="radio" name="sexo" required="required" value="feminino" id="feminino"><br />
-                        <label style="font-size: medium" for="feminino">Feminino</label>
-                        
-                   
-                </div>
             </div>
-        </div>
+            
+                {{--- Formulario sexo Cras ---}}
+               
+                <div class="col-md-6">
+                    <div class="form-group row">
+                   <label class="col-md-1 label-control" for="sexo">Sexo :</label>
+
+                   <div class="col-md-8" id="sexo" >
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" required="required" id="masculino"
+                    value="masculino" {{ $pessoa->sexo=="masculino" ? 'checked='.'"'.'checked'.'"' : '' }}><br>
+                    <label class="form-check-label" for="masculino">Masculino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input  class="form-check-input" type="radio" name="sexo" required="required" id="feminino"
+                    value="feminino" {{ $pessoa->sexo=="feminino" ? 'checked='.'"'.'checked'.'"' : '' }}><br>
+                    <label class="form-check-label" for="feminino">Feminino</label>
+                </div>
+
+                    </div>
+                            </div>
+                        </div>
+                
             {{--- Formulario cidade Cras ---}}
 
             <div class="form-group">

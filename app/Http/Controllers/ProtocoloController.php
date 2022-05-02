@@ -10,7 +10,7 @@ use App\Pessoa;
 use PDF;
 use App\arquivo;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 
 class ProtocoloController extends Controller
 {
@@ -63,13 +63,27 @@ class ProtocoloController extends Controller
     {       
             //dd($request);
             
-            $pessoa = Pessoa::all(); 
+            $pessoa = Pessoa::find($request->input('pessoa_id')); 
             $protocolo= new Protocolo($request->all());
             $protocolo->descricao = $request->input('descricao');
             $protocolo->data = $request->input('data');
             $protocolo->prazo = $request->input('prazo');  
-            $protocolo = Pessoa::where('id', 'pessoa_id')->first();
+            $protocolo->pessoa()->associate($pessoa);
             
+            $validator = Validator::make($request->all(), [
+                'descrição' => 'required',
+                'data' => 'required',
+                'prazo' => 'required',
+                
+    
+
+            ]);
+
+            if ($validator->fails()) {
+                return redirect('cadastroprotocolo')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
           
             $protocolo->save();
 
@@ -84,7 +98,7 @@ class ProtocoloController extends Controller
 
              
 
-            return redirect('/tabelaprotocolo', compact('pessoa', 'protocolo'))->with('success','Protocolo cadastrado com sucesso!');;
+            return redirect('/tabelaprotocolo')->with('success','Protocolo cadastrado com sucesso!');
     }
 
     public function show ($id) 
@@ -142,6 +156,7 @@ class ProtocoloController extends Controller
        ->orWhere('pessoa_id', 'LIKE', '%' .$search. '%')
        ->orWhere('prazo', 'LIKE', '%' .$search. '%')->get();
 
+
         return view('protocolo/tabelaprot', compact('protocolo'));
     }
 
@@ -149,7 +164,7 @@ class ProtocoloController extends Controller
     {
         $protocolo = Protocolo::all();
         
-        $pdf = PDF::loadView('pdf', compact('protocolo'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('pdf', compact('protocolo'));
   
         return $pdf->setPaper('a4')->download('relatorio.pdf');
     }
@@ -160,4 +175,5 @@ class ProtocoloController extends Controller
         var_dump($request->file('arquivo') ,$request->all);
     }
        
+   
 }

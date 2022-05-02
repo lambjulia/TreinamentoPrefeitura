@@ -7,6 +7,7 @@ use View;
 use PDF;
 use Illuminate\Http\Request;
 use App\Http\Requests\SeriesFormRequest; 
+use Illuminate\Support\Facades\Validator;
 
 use App\Pessoa;
 
@@ -62,11 +63,20 @@ class PessoaController extends Controller
             $pessoa->numero = $request->input('numero');
             $pessoa->complemento = $request->input('complemento');
     
-            $this->validate($request, [
-            
-                'cpf' => 'required|cpf',
+            $validator = Validator::make($request->all(), [
+                'nome' => ['required'],
+                'data_de_nascimento' => ['required'],
+                'cpf' => ['required', 'unique:pessoas'],
+                'sexo' => ['required'],
+    
 
             ]);
+
+            if ($validator->fails()) {
+                return redirect('cadastro')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
 
             $pessoa->save();
 
@@ -111,6 +121,15 @@ class PessoaController extends Controller
         return redirect('tabela')->with('success','Pessoa editada com sucesso!');
       
         
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($this->somethingElseIsInvalid()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!');
+            }
+        });
     }
 
     public function delete($id)

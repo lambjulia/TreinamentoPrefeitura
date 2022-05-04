@@ -3,6 +3,7 @@
         <table class="table table-striped nowrap" style="width: 100%; margin-top:0;" id="lista">
             <thead style="align:center">
                 <tr>
+                    <th>Ver</th>
                     <th>Responsável</th>
                     <th>Data/Hora</th>
                     <th>Dado Antigo</th>
@@ -15,6 +16,9 @@
             <tbody style="align:center">
                 @foreach ($audits as $auditoria )
                 <tr>
+                    <td>
+                    <a href="{{ url('showaudit', $auditoria->id) }}" class="btn btn-primary" style="float: right">Ver</a>
+                    </td>
                     <td>{{ App\User::whereId($auditoria->user_id)->pluck('name') }}</>
                     <td>{{ date('d-m-Y', strtotime($auditoria->created_at)) }}</td>
                     <td>{{ $auditoria->old_values }}</td>
@@ -22,7 +26,10 @@
                     <td>{{ $auditoria->event }}</td>
                     <td>{{ $auditoria->ip_address }}</td>
                     <td>{{ $auditoria->url }}</td>
+                    
                 </tr>
+
+                
                 @endforeach
             </tbody>
         </table>

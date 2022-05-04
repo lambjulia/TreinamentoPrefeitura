@@ -55,6 +55,11 @@ Route::get('/auditoria','HomeController@audit')->name('audit')->middleware('auth
 
 Route::get('/pdfview', 'ProtocoloController@pdf');
 
+Route::get('/showaudit/{id}', 'HomeController@show');
+
+Route::get('/acompanhamento', 'ProtocoloController@acomp');
+
+Route::post('/saveacomp', 'ProtocoloController@storeacomp')->name('saveacomp');
 
 Auth::routes();
 

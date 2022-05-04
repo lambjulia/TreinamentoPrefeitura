@@ -8,6 +8,18 @@
     <button type="submit">OK</button>
   </form>
 
+  @if ($message = Session::get('success'))
+<div class="alert alert-success alert-block">
+        <strong>{{ $message }}</strong>
+</div>
+@endif
+
+@if ($message = Session::get('warning'))
+<div class="alert alert-danger">
+	<strong>{{ $message }}</strong>
+</div>
+@endif
+
 <div class="container-fluid no-padding table-responsive-sm">
     <table class="table table-striped nowrap" style="width:100%" id="prefeitura">
         <thead style="align: center">

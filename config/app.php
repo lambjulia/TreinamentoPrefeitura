@@ -164,6 +164,8 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        
+
 
         /*
          * Package Service Providers...

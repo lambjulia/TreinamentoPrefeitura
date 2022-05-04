@@ -47,7 +47,7 @@
                     <a href="{{ route('editprot', $protocolo->id) }}" class="btn btn-success" style="float: right">Editar</a>
                 </td>
                 <td>
-                    <form action="/delete/{{ $protocolo->id }}" method="POST">
+                    <form action="/deleteprot/{{ $protocolo->id }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"  class="btn btn-danger" style="float: right"  onclick="return confirm('Deseja mesmo deletar?');" ><i class='fa fa-trash'></i> Delete</a></button>

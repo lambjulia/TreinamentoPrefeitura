@@ -8,6 +8,7 @@ use PDF;
 use Illuminate\Http\Request;
 use App\Http\Requests\SeriesFormRequest; 
 use Illuminate\Support\Facades\Validator;
+use LaravelLegends\PtBrValidator\Rules\Cpf;
 
 use App\Pessoa;
 

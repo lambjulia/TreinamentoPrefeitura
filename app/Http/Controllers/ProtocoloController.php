@@ -7,8 +7,9 @@ use App\Http\Requests\SeriesFormRequest;
 use App\User;
 use App\Protocolo;
 use App\Pessoa;
+use App\Acompanhamento;
 use PDF;
-use App\arquivo;
+use App\Arquivo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -71,7 +72,7 @@ class ProtocoloController extends Controller
             $protocolo->pessoa()->associate($pessoa);
             
             $validator = Validator::make($request->all(), [
-                'descrição' => 'required',
+                'descricao' => 'required',
                 'data' => 'required',
                 'prazo' => 'required',
                 
@@ -93,6 +94,9 @@ class ProtocoloController extends Controller
                 $arquivos->arquivo = $request->file('arquivos')->store('arquivo/'.$protocolo->id);
                 $arquivos->tipo = 'arquivos';
                 $arquivos->protocolo_id = $protocolo->id;
+                $validator = Validator::make($request->all(), [
+                    'arquivo' => 'mimes:jpeg,jpg,png|max:5',
+                ]);
                 $arquivos->save();
               }
 
@@ -103,6 +107,7 @@ class ProtocoloController extends Controller
 
     public function show ($id) 
     {
+        $arquivos = Arquivo::find($id);
         $protocolo = Protocolo::all();
         $protocolo = Protocolo::find($id);
         return view ('protocolo/showprot', ['protocolo' => $protocolo, 'id' => $id]);
@@ -175,5 +180,22 @@ class ProtocoloController extends Controller
         var_dump($request->file('arquivo') ,$request->all);
     }
        
-   
+   public function acomp() {
+        $acompanhamento = Acompanhamento::all();
+        $user = User::all();
+        return view('protocolo/acompanhamento', compact('acompanhamento', $acompanhamento, 'user', $user));
+   }
+
+   public function storeacomp(Request $request) {
+
+    $protocolo = Protocolo::find($request->input('protocolo_id')); 
+    $acompanhamento= new Acompanhamento($request->all());
+    $acompanhamento->descricao = $request->input('descricao');
+    $acompanhamento->data = $request->input('data');
+    $acompanhamento->protocolo()->associate($protocolo);
+
+    $acompanhamento->save();
+
+    return redirect('/tabelaprotocolo')->with('success','Protocolo cadastrado com sucesso!');
+   }
 }

@@ -20,6 +20,10 @@
                 <label for="prazo" class="control-label">Prazo: *</label>
                 <input type="text" name="prazo"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->prazo }}"><br>
 
+                <div class="card-footer">
+                <a href="{{ url('acompanhamento') }}">Registrar acompanhamento</a>
+                </div>
+
             </tr>
             <form method="GET" action="/pdf/{id}" enctype="multipart/form-data">
                 <div class="form-group">

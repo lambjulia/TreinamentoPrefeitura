@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Http\Controllers\RegistroController;
 use Illuminate\Database\Eloquent\Collection;
 
 Route::get('/', 'HomeController@index')->middleware('auth');
@@ -53,13 +53,13 @@ Route::post('upload', 'ProtocoloController@upload')->middleware('auth');
 
 Route::get('/auditoria','HomeController@audit')->name('audit')->middleware('auth');
 
-Route::get('/pdfview', 'ProtocoloController@pdf');
+Route::get('/pdfgenerate/{id}', 'ProtocoloController@onegeneratePDF')->name('pdfgenerate');
 
 Route::get('/showaudit/{id}', 'HomeController@show');
 
-Route::get('/acompanhamento', 'ProtocoloController@acomp');
+Route::get('/cadastroprotocolo/ver/acompanhamento/{id}', 'ProtocoloController@acomp')->name('acompanhamento')->defaults('id', 'acomp');
 
-Route::post('/saveacomp', 'ProtocoloController@storeacomp')->name('saveacomp');
+Route::post('/saveacomp/{id}', 'ProtocoloController@storeacomp')->name('saveacomp')->defaults('id', 'storeacomp');
 
 Auth::routes();
 

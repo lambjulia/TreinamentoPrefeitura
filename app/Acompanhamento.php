@@ -11,4 +11,8 @@ class Acompanhamento extends Model
     public function protocolo() {
         return $this->belongsTo(\App\Protocolo::class);
     }
+
+    public function user() {
+        return $this->belongsTo(\App\User::class);
+    }
 }

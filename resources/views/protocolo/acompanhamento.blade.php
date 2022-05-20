@@ -2,7 +2,9 @@
 @section('title','Prefeitura')
 @section('content')
 
-<form action="{{ route('saveacomp')}}" method="POST" class="form-horizontal"  enctype="multipart/form-data">
+
+
+<form action="{{ route('saveacomp', ['id'=>$protocolo->id])}}" method="POST" class="form-horizontal"  enctype="multipart/form-data">
     @csrf               
     @method('POST')
     

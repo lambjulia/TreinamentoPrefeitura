@@ -2,11 +2,7 @@
 @section('title','Prefeitura')
 @section('content')
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-block">
-        <strong>{{ $message }}</strong>
-</div>
-@endif
+
 <div class="conteudo">
     <div class="row d-flex justify-content-around">
         <div class="col-sm-3">
@@ -61,5 +57,7 @@
         </div>
     </div>
 </div>
+<script>
 
+    </script>
 @endsection

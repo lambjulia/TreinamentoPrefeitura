@@ -63,7 +63,7 @@
 
         
                 <div class="form-group">
-                    <input type="file" name="arquivos" class="custom-file-unput" id="arquivos" multiple >
+                    <input type="file" name="arquivo[]" class="custom-file-unput" id="arquivo" multiple >
                    
                     
                 </div>

@@ -8,11 +8,7 @@
     <button type="submit">OK</button>
   </form>
 
-  @if ($message = Session::get('success'))
-<div class="alert alert-success alert-block">
-        <strong>{{ $message }}</strong>
-</div>
-@endif
+  
 
 @if ($message = Session::get('warning'))
 <div class="alert alert-danger">
@@ -58,8 +54,9 @@
 </div>
 
 <script>
+
     $(document).ready(function () {
-    $('#exemplo').DataTable({
+    $('prefeitura').DataTable({
         select: false,
         responsive: true,
         "order": [
@@ -94,5 +91,18 @@
         }
     });
 });
+
+
 </script>
+
+<script>
+
+    $(document).ready(function(){
+
+
+  $('#cpf').mask('000.000.000-00', {reverse: true});
+
+  });
+    </script>
+
 @endsection

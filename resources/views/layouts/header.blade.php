@@ -42,9 +42,11 @@
     </script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     
-    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <script src='jquery.min.js'></script>
 
 </head>

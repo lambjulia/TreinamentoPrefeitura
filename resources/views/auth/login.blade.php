@@ -44,7 +44,6 @@
                         {{ __('Esqueceu a senha?') }}
                     </a>
                     @endif
-                    <p class="register text-center">Não possui conta? <a href="/register">Registrar</a></p>
                 </div>
             </form>
         </div>

@@ -63,11 +63,11 @@
                    <div class="col-md-8" id="sexo" >
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" required="required" value="masculino" id="masculino"><br>
+                    <input class="form-check-input" type="radio" name="sexo" value="masculino" id="masculino"><br>
                     <label class="form-check-label" for="masculino">Masculino</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input  class="form-check-input" type="radio" name="sexo" required="required" value="feminino" id="feminino"><br>
+                    <input  class="form-check-input" type="radio" name="sexo" value="feminino" id="feminino"><br>
                     <label class="form-check-label" for="feminino">Feminino</label>
                 </div>
 
@@ -144,6 +144,7 @@
 </div>
 
 <script>
+
     $(document).ready(function(){
 
 

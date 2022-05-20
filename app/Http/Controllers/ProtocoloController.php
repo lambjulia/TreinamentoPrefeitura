@@ -13,6 +13,7 @@ use App\Arquivo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+
 class ProtocoloController extends Controller
 {
     /**
@@ -78,6 +79,11 @@ class ProtocoloController extends Controller
                 
     
 
+            ], [
+                'descricao.required'=>'O campo descrição é obrigatório',
+                'data.unique'=>'O campo data é obrigatório',
+                'prazo.required' => 'O campo prazo é obrigatório',
+                
             ]);
 
             if ($validator->fails()) {
@@ -88,18 +94,19 @@ class ProtocoloController extends Controller
           
             $protocolo->save();
 
-            $arquivos = new Arquivo();
 
-            if(!is_null($request->file('arquivos'))) {
-                $arquivos->arquivo = $request->file('arquivos')->store('arquivo/'.$protocolo->id);
-                $arquivos->tipo = 'arquivos';
-                $arquivos->protocolo_id = $protocolo->id;
-                $validator = Validator::make($request->all(), [
-                    'arquivo' => 'mimes:jpeg,jpg,png|max:5',
-                ]);
-                $arquivos->save();
-              }
+              if(!empty($request->allFiles()['arquivo'])){
+                for($i = 0; $i <count($request->allFiles()['arquivo']); $i++){
+                   $arquivo = $request->allFiles()['arquivo'][$i];
 
+                   $anexos = new Arquivo();
+                   $anexos->tipo = 'arquivo';
+                   $anexos->protocolo_id = $protocolo->id;
+                   $anexos->arquivo = $arquivo->store('arquivos/'.$protocolo->id);
+                   //$anexos->nomeanexo = $arquivo->getClientOriginalName();
+                   $anexos->save();
+                }
+               }
              
 
             return redirect('/tabelaprotocolo')->with('success','Protocolo cadastrado com sucesso!');
@@ -107,10 +114,11 @@ class ProtocoloController extends Controller
 
     public function show ($id) 
     {
+        $user = User::all();
+        $acompanhamento = Acompanhamento::all();
         $arquivos = Arquivo::find($id);
-        $protocolo = Protocolo::all();
         $protocolo = Protocolo::find($id);
-        return view ('protocolo/showprot', ['protocolo' => $protocolo, 'id' => $id]);
+        return view ('protocolo/showprot', ['protocolo' => $protocolo, 'id' => $id, 'acompanhamento' => $acompanhamento, 'user' => $user]);
     }
 
 
@@ -180,15 +188,21 @@ class ProtocoloController extends Controller
         var_dump($request->file('arquivo') ,$request->all);
     }
        
-   public function acomp() {
+   public function acomp(Request $request, $id) {
+
+        $id = request()->route()->parameter('id');
+        error_log('teste'.$id);
         $acompanhamento = Acompanhamento::all();
         $user = User::all();
-        return view('protocolo/acompanhamento', compact('acompanhamento', $acompanhamento, 'user', $user));
+        $protocolo = Protocolo::find($id); 
+        return view('protocolo/acompanhamento', compact('acompanhamento', $acompanhamento, 'user', $user, 'protocolo', $protocolo));
    }
 
-   public function storeacomp(Request $request) {
+   public function storeacomp(Request $request, $id) {
 
-    $protocolo = Protocolo::find($request->input('protocolo_id')); 
+    
+    error_log('teste'.$id);
+    $protocolo = Protocolo::find($id);
     $acompanhamento= new Acompanhamento($request->all());
     $acompanhamento->descricao = $request->input('descricao');
     $acompanhamento->data = $request->input('data');
@@ -197,5 +211,14 @@ class ProtocoloController extends Controller
     $acompanhamento->save();
 
     return redirect('/tabelaprotocolo')->with('success','Protocolo cadastrado com sucesso!');
+   }
+
+   public function onegeneratePDF($id)
+   {
+       $protocolo = Protocolo::find($id);
+       $pessoa = Pessoa::all();
+       $pdf = PDF::loadView('pdfunico', compact('protocolo', 'pessoa'));
+ 
+       return $pdf->setPaper('a4')->download('relatorio.pdf');
    }
 }

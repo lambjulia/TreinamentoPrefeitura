@@ -19,7 +19,7 @@ class User extends Authenticatable implements Auditable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'cpf', 'role', 'password',
     ];
     protected $primaryKey = 'id';
 
@@ -42,4 +42,7 @@ class User extends Authenticatable implements Auditable
     ];
 
 
+    public function acompanhamento() {
+        return $this->hasMany(\App\Acompanhamento::class);
+    }
 }

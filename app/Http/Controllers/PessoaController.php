@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SeriesFormRequest; 
 use Illuminate\Support\Facades\Validator;
 use LaravelLegends\PtBrValidator\Rules\Cpf;
+use Illuminate\Support\Facades\Auth;
 
 use App\Pessoa;
 
@@ -52,11 +53,11 @@ class PessoaController extends Controller
     public function store(Request $request)
     {
 
-        
+            $cpfSanitizado  = str_replace( array( '.', '-' ), '', $request->input('cpf'));
             $pessoa = new Pessoa();
             $pessoa->nome = $request->input('nome');
             $pessoa->data_de_nascimento = $request->input('data_de_nascimento');
-            $pessoa->cpf = $request->input('cpf');
+            $pessoa->cpf = $cpfSanitizado;
             $pessoa->sexo = $request->input('sexo');
             $pessoa->cidade = $request->input('cidade');
             $pessoa->bairro = $request->input('bairro');
@@ -67,10 +68,16 @@ class PessoaController extends Controller
             $validator = Validator::make($request->all(), [
                 'nome' => ['required'],
                 'data_de_nascimento' => ['required'],
-                'cpf' => ['required', 'unique:pessoas'],
-                'sexo' => ['required'],
+                'cpf' => ['required', 'unique:pessoas', 'cpf'], 
+                'sexo' => ['required'], 
     
 
+            ], [
+                'cpf.cpf'=>'CPF inválido',
+                'cpf.unique'=>'CPF ja cadastrado.',
+                'nome.required' => 'O campo nome é obrigatório',
+                'data_de_nascimento.required' => 'O campo data de nascimento é obrigatório',
+                'sexo.required' => 'O campo sexo é obrigatório',
             ]);
 
             if ($validator->fails()) {
@@ -82,7 +89,7 @@ class PessoaController extends Controller
             $pessoa->save();
 
 
-            return redirect('/')->with('success','Pessoa cadastrada com sucesso!');
+            return redirect('/tabela')->with('success','Pessoa cadastrada com sucesso!');
     }
 
     public function show ($id) 

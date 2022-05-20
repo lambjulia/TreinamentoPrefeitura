@@ -35,12 +35,13 @@
                     <div class="expandable collapse {{ (request()->routeIs('')) || (request()->routeIs('')) || (request()->routeIs('pdf')) ? 'show' : '' }}"
                         aria-controls="collapseOne" id="base">
                         <ul class="nav nav-collapse ">
-                            
+                            <li class="{{ (request()->routeIs('cadastro')) ? 'active' : '' }}">
                                 <a href="{{ url('cadastro') }}">
                                     <span class="sub-item">Cadastro</span>
                                 </a>
                             </li>
                             
+                            <li class="{{ (request()->routeIs('tabela')) ? 'active' : '' }}">
                                 <a href="{{ url('tabela') }}">
                                     <span class="sub-item">Lista</span>
                                 </a>
@@ -72,7 +73,7 @@
                 </li>
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#sidebarLayouts2">
-                        <i class="fas fa-bed" actived></i>
+                        <i class="fa fa-eye" aria-hidden="true"></i>
                         <p>Auditoria</p>
                         <span class="caret"></span>
                     </a>
@@ -83,11 +84,31 @@
                                     <span class="sub-item">Auditoria</span>
                                 </a>
                             </li>
-                           
                         </ul>
                     </div>
-                </li>
-                <li class="nav-item">
+                        </li>
+
+                    @if(Auth::user()->role < 3)    
+                    <li class="nav-item">
+                            <a data-toggle="collapse" href="#sidebarLayouts3">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <p>Usuários</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="expandable collapse" id="sidebarLayouts3">
+                                <ul class="nav nav-collapse">
+                                    <li class="">
+                                        <a href="register">
+                                            <span class="sub-item">Cadastrar novo usuário</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                                </li>
+                    @endif     
+                   
+                
+                    <li class="nav-item">
                     <a data-toggle="collapse" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>

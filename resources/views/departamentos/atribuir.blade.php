@@ -18,63 +18,57 @@
 </div>
 @endif
 
-<form action="{{ url('/searchprot') }}" method="GET">
-    <label for="busca">Buscar</label>
-    <input type="search" id="search" name="query">
-    <button type="submit">OK</button>
-  </form>
+<form action="{{ route('saveatribuir', ['id'=>$departamento->id]) }}" method="POST" class="form-horizontal" id="formProduto" enctype="multipart/form-data">
+    @csrf               
+    @method('POST')
 
-<div class="container-fluid no-padding table-responsive-sm">
-    <table class="table table-striped nowrap" style="width:100%" id="prefeitura">
-        <thead style="align: center">
-            <tr>
-                <th>Numero de Protocolo</th>
-                <th>Descrição</th>
-                <th>Nome</th>
-            
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($protocolo as $protocolo)
-            <tr>
-                <td>{{ $protocolo->pessoa_id }}</td>
-                <td>{{ $protocolo->descricao }} </td>
-                <td>{{ $protocolo->pessoa->nome }}</td>
+    <div class="container-fluid no-padding table-responsive-sm">
+        <table class="table table-striped nowrap" style="width:100%" id="prefeitura">
+            <thead style="align: center">
+                <tr>
+                   
+                    <th>Nome do Departamento</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr>
                 
+                    <td>{{ $departamento->departamento }}</td>
+                   
+    
+                </tr>
                 
-                
-                <td>
-                    <a href="{{ route('showprot', $protocolo->id) }}" class="btn btn-primary" style="float: right">Ver</a>
-                </td>
-                <td>
-                    <a href="{{ route('editprot', $protocolo->id) }}" class="btn btn-success" style="float: right">Editar</a>
-                </td>
-                <td>
-                    <form action="/deleteprot/{{ $protocolo->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"  class="btn btn-danger" style="float: right"  onclick="return confirm('Deseja mesmo deletar?');" ><i class='fa fa-trash'></i> Delete</a></button>
-                    </form>
-                </td>
-
-            </tr>
+               
+            </tbody>
+        </table>
+    </div>
+           
+  
+<div>
+        <select required="required" style="background-color: #white" class="form-control"  name="user_id" id="user_id">
+            <option  value="">Usuário do acompanhamento</option>    
+            @foreach ($user as $user)
+            <option  value="{{ $user->id }}"> 
+            {{ $user->name }}
+            </option>
             @endforeach
-            <form method="GET" action="/pdf/{id}" enctype="multipart/form-data">
-                <div class="form-group">
-                 
-                 <div class="control">
-                 
-                     <button type="submit" class="btn btn-primary">Download PDF Relatórios</button>
-                 
-                 </div>
-                 
-                </div>
-                 
-                </form> 
-        </tbody>
+        </select> 
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Atribuir usuário</button>
+        </div>
+</div>
+
+</form>
+
+
+
     </table>
 </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  
 
 <script>

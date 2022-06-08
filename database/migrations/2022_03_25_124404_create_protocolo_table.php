@@ -20,6 +20,8 @@ class CreateProtocoloTable extends Migration
             $table->string('prazo')->nullable();
             $table->unsignedBigInteger('pessoa_id')->unsigned;
             $table->foreign('pessoa_id')->references('id')->on('pessoas');
+            $table->unsignedBigInteger('departamento_id');
+            $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->timestamps();
         });
     }

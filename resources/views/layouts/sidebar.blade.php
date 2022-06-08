@@ -71,6 +71,7 @@
                         </ul>
                     </div>
                 </li>
+                @if(Auth::user()->role < 3)
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#sidebarLayouts2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
@@ -87,6 +88,7 @@
                         </ul>
                     </div>
                         </li>
+                    @endif
 
                     @if(Auth::user()->role < 3)    
                     <li class="nav-item">
@@ -98,7 +100,7 @@
                             <div class="expandable collapse" id="sidebarLayouts3">
                                 <ul class="nav nav-collapse">
                                     <li class="">
-                                        <a href="register">
+                                        <a href="{{ url('register') }}">
                                             <span class="sub-item">Cadastrar novo usuário</span>
                                         </a>
                                     </li>
@@ -107,6 +109,29 @@
                                 </li>
                     @endif     
                    
+                    @if(Auth::user()->role < 3)    
+                    <li class="nav-item">
+                            <a data-toggle="collapse" href="#sidebarLayouts4">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                <p>Departamentos</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="expandable collapse" id="sidebarLayouts4">
+                                <ul class="nav nav-collapse">
+                                    <li class="">
+                                        <a href="{{ url('cadastrodepart')}}">
+                                            <span class="sub-item">Cadastrar novo departamento</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="{{ url('tabeladepart')}}">
+                                            <span class="sub-item">Lista de Departamento</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                                </li>
+                    @endif     
                 
                     <li class="nav-item">
                     <a data-toggle="collapse" href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script src="{{asset('js/validation/validationinfo.js')}}"></script>
+
+
 
 <form action="/store" method="POST" class="form-horizontal" id="formProduto">
     @csrf               
@@ -142,6 +143,7 @@
 </div>
 </div>
 </div>
+
 
 <script>
 

@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <form action="{{ route('alterar_cadastro', $pessoa->id) }}" method="POST" class="form-horizontal" id="formProduto">
     @csrf               
     @method('POST')
@@ -135,6 +136,7 @@
 </div>
 </div>
 </div>
+
 
 <script>
     $(document).ready(function(){

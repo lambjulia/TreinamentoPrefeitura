@@ -51,15 +51,26 @@ Route::get('/pdf/{id}', 'ProtocoloController@generatePDF')->middleware('auth');
 
 Route::post('upload', 'ProtocoloController@upload')->middleware('auth');
 
-Route::get('/auditoria','HomeController@audit')->name('audit')->middleware('auth');
+Route::get('/auditoria','AuditController@audit')->name('audit')->middleware('auth');
 
-Route::get('/pdfgenerate/{id}', 'ProtocoloController@onegeneratePDF')->name('pdfgenerate');
+Route::get('/pdfgenerate/{id}', 'ProtocoloController@onegeneratePDF')->name('pdfgenerate')->middleware('auth');
 
-Route::get('/showaudit/{id}', 'HomeController@show');
+Route::get('/showaudit/{id}', 'AuditController@show')->middleware('auth');
 
-Route::get('/cadastroprotocolo/ver/acompanhamento/{id}', 'ProtocoloController@acomp')->name('acompanhamento')->defaults('id', 'acomp');
+Route::get('/cadastroprotocolo/ver/acompanhamento/{id}', 'ProtocoloController@acomp')->name('acompanhamento')->defaults('id', 'acomp')->middleware('auth');
 
-Route::post('/saveacomp/{id}', 'ProtocoloController@storeacomp')->name('saveacomp')->defaults('id', 'storeacomp');
+Route::post('/saveacomp/{id}', 'ProtocoloController@storeacomp')->name('saveacomp')->defaults('id', 'storeacomp')->middleware('auth');
+
+Route::get('/cadastrodepart', 'DepartamentoController@index')->middleware('auth');
+
+Route::post('/storedepart', 'DepartamentoController@store')->name('storedepart')->middleware('auth');
+
+Route::get('/tabeladepart', 'DepartamentoController@tabela')->middleware('auth');
+
+Route::get('tabeladepart/atribuir/{id}', 'DepartamentoController@atribuir')->name('atribuir')->middleware('auth');
+
+Route::post('saveatribuir/{id}', 'DepartamentoController@save')->name('saveatribuir')->middleware('auth');
+
 
 Auth::routes();
 

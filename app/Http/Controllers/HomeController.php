@@ -46,15 +46,4 @@ class HomeController extends Controller
         return view('welcome');
     }
 
-    public function audit()
-    {
-        $audits = Audit::all();
-        return View('auditoria', compact('audits'));
-    }
-
-    public function show ($id) {
-        $audits = Audit::all();
-        $audits = Audit::find($id);
-        return view ('showaudit', compact('audits'));
-    }
 }

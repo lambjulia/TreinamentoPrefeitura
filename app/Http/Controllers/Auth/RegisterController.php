@@ -38,9 +38,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['AdmSistema' OR 'AdmTI']);
-       // $this->middleware('AdmTI');
+        $this->middleware(['AdmSistema', 'AdmTI']);
         
+       
     }
 
     public function index() {

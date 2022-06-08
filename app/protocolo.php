@@ -11,7 +11,7 @@ class Protocolo extends Model implements AuditableContract
 {
     use Auditable;
 
-    protected $fillable = ['descricao', 'data', 'prazo', 'pessoa_id'];
+    protected $fillable = ['descricao', 'data', 'prazo', 'pessoa_id', 'departamento_id'];
     protected $dates = ['data'];
     protected $primaryKey = 'id';
     
@@ -22,5 +22,9 @@ class Protocolo extends Model implements AuditableContract
 
     public function acompanhamento() {
         return $this->hasMany(\App\Acompanhamento::class);
+    }
+
+    public function departamento() {
+        return $this->belongsTo(\App\Departamento::class);
     }
 }

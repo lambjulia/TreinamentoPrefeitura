@@ -8,6 +8,7 @@ use App\User;
 use App\Protocolo;
 use App\Pessoa;
 use App\Acompanhamento;
+use App\Departamento;
 use PDF;
 use App\Arquivo;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,15 @@ class ProtocoloController extends Controller
 
     public function index()
         {
+        
         $pessoa = Pessoa::all();  
-        $protocolo = Protocolo::all();
+        
+        //$departamento = Departamento::all();
+        //$usuario = User::find(Auth::id());
+        $user = Auth::user();
+        $departamento = $user->departamento()->pluck('departamento_id');
+        $protocolo = Protocolo::whereIn('departamento_id', $departamento)->get();
+        //error_log('user_id'. $user->id . 'departamento' . $departamento);
         return view('protocolo/tabelaprot', compact('pessoa', $pessoa, 'protocolo', $protocolo));
         }
 
@@ -36,7 +44,9 @@ class ProtocoloController extends Controller
     {
         $protocolo = Protocolo::all();
         $pessoa = Pessoa::all(); 
-        return view('protocolo/cadastroprot', compact('pessoa', $pessoa, 'protocolo', $protocolo));
+        $user = Auth::user();
+        $departamento = $user->departamento()->get();
+        return view('protocolo/cadastroprot', compact('pessoa', $pessoa, 'protocolo', $protocolo, 'departamento', $departamento));
     }
 
     /**
@@ -66,11 +76,13 @@ class ProtocoloController extends Controller
             //dd($request);
             
             $pessoa = Pessoa::find($request->input('pessoa_id')); 
+            $departamento = Departamento::find($request->input('departamento_id'));
             $protocolo= new Protocolo($request->all());
             $protocolo->descricao = $request->input('descricao');
             $protocolo->data = $request->input('data');
             $protocolo->prazo = $request->input('prazo');  
             $protocolo->pessoa()->associate($pessoa);
+            $protocolo->departamento()->associate($departamento);
             
             $validator = Validator::make($request->all(), [
                 'descricao' => 'required',
@@ -115,7 +127,7 @@ class ProtocoloController extends Controller
     public function show ($id) 
     {
         $user = User::all();
-        $acompanhamento = Acompanhamento::all();
+        $acompanhamento = Acompanhamento::where('protocolo_id', '=', $id)->get();
         $arquivos = Arquivo::find($id);
         $protocolo = Protocolo::find($id);
         return view ('protocolo/showprot', ['protocolo' => $protocolo, 'id' => $id, 'acompanhamento' => $acompanhamento, 'user' => $user]);
@@ -177,7 +189,7 @@ class ProtocoloController extends Controller
     {
         $protocolo = Protocolo::all();
         
-        $pdf = PDF::loadView('pdf', compact('protocolo'));
+        $pdf = PDF::loadView('protocolo/pdf', compact('protocolo'));
   
         return $pdf->setPaper('a4')->download('relatorio.pdf');
     }
@@ -217,7 +229,7 @@ class ProtocoloController extends Controller
    {
        $protocolo = Protocolo::find($id);
        $pessoa = Pessoa::all();
-       $pdf = PDF::loadView('pdfunico', compact('protocolo', 'pessoa'));
+       $pdf = PDF::loadView('protocolo/pdfunico', compact('protocolo', 'pessoa'));
  
        return $pdf->setPaper('a4')->download('relatorio.pdf');
    }

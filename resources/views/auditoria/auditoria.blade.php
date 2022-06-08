@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="conteudo">
-    @include('audit')
+    @include('auditoria/audit')
 </div>
 
 @endsection

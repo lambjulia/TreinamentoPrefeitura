@@ -45,4 +45,8 @@ class User extends Authenticatable implements Auditable
     public function acompanhamento() {
         return $this->hasMany(\App\Acompanhamento::class);
     }
+
+    public function departamento() {
+        return $this->belongsToMany(\App\Departamento::class);
+    }
 }

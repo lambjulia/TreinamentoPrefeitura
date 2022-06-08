@@ -34,6 +34,8 @@
                         <input type="text" name="data"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->data }}"><br>
                         <label for="prazo" class="control-label">Prazo: *</label>
                         <input type="text" name="prazo"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->prazo }}"><br>
+                        <label for="departamento" class="control-label">Departamento: *</label>
+                        <input type="text" name="departamento_id"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->departamento->departamento }}"><br>
         
                     
                       
@@ -68,7 +70,7 @@
                         <td>{{ $acompanhamento->user->name }}</td>
                     </tr>
       
-                @endforeach
+                    @endforeach
                 <a class="btn btn-primary" href="{{ route('acompanhamento', ['id'=>$protocolo->id]) }}">Registrar acompanhamento</a>
         </tbody>
     </table>

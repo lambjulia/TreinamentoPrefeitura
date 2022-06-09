@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 namespace App\Http\Controllers;
+
 use View;
 use PDF;
 use Illuminate\Http\Request;
-use App\Http\Requests\SeriesFormRequest; 
+use App\Http\Requests\SeriesFormRequest;
 use Illuminate\Support\Facades\Validator;
 use LaravelLegends\PtBrValidator\Rules\Cpf;
 use Illuminate\Support\Facades\Auth;
@@ -15,16 +16,16 @@ use App\Pessoa;
 
 class PessoaController extends Controller
 {
-    
+
     public function index()
     {
-        $pessoa = \App\Pessoa::all(); 
-       
+        $pessoa = \App\Pessoa::all();
+
         return view('pessoa/tabela', compact('pessoa', $pessoa));
     }
 
 
-     public function cadastro()
+    public function cadastro()
     {
         return view('pessoa/cadastro');
     }
@@ -36,7 +37,7 @@ class PessoaController extends Controller
      */
     public function create()
     {
-        return view ('pessoa/cadastro');
+        return view('pessoa/cadastro');
     }
 
     /**
@@ -53,55 +54,55 @@ class PessoaController extends Controller
     public function store(Request $request)
     {
 
-            $cpfSanitizado  = str_replace( array( '.', '-' ), '', $request->input('cpf'));
-            $pessoa = new Pessoa();
-            $pessoa->nome = $request->input('nome');
-            $pessoa->data_de_nascimento = $request->input('data_de_nascimento');
-            $pessoa->cpf = $cpfSanitizado;
-            $pessoa->sexo = $request->input('sexo');
-            $pessoa->cidade = $request->input('cidade');
-            $pessoa->bairro = $request->input('bairro');
-            $pessoa->rua = $request->input('rua');
-            $pessoa->numero = $request->input('numero');
-            $pessoa->complemento = $request->input('complemento');
-    
-            $validator = Validator::make($request->all(), [
-                'nome' => ['required'],
-                'data_de_nascimento' => ['required'],
-                'cpf' => ['required', 'unique:pessoas', 'cpf'], 
-                'sexo' => ['required'], 
-    
+        $cpfSanitizado  = str_replace(array('.', '-'), '', $request->input('cpf'));
+        $pessoa = new Pessoa();
+        $pessoa->nome = $request->input('nome');
+        $pessoa->data_de_nascimento = $request->input('data_de_nascimento');
+        $pessoa->cpf = $cpfSanitizado;
+        $pessoa->sexo = $request->input('sexo');
+        $pessoa->cidade = $request->input('cidade');
+        $pessoa->bairro = $request->input('bairro');
+        $pessoa->rua = $request->input('rua');
+        $pessoa->numero = $request->input('numero');
+        $pessoa->complemento = $request->input('complemento');
 
-            ], [
-                'cpf.cpf'=>'CPF inválido',
-                'cpf.unique'=>'CPF ja cadastrado.',
-                'nome.required' => 'O campo nome é obrigatório',
-                'data_de_nascimento.required' => 'O campo data de nascimento é obrigatório',
-                'sexo.required' => 'O campo sexo é obrigatório',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect('cadastro')
-                            ->withErrors($validator)
-                            ->withInput();
-            }
-
-            $pessoa->save();
+        $validator = Validator::make($request->all(), [
+            'nome' => ['required'],
+            'data_de_nascimento' => ['required'],
+            'cpf' => ['required', 'unique:pessoas', 'cpf'],
+            'sexo' => ['required'],
 
 
-            return redirect('/tabela')->with('success','Pessoa cadastrada com sucesso!');
+        ], [
+            'cpf.cpf' => 'CPF inválido',
+            'cpf.unique' => 'CPF ja cadastrado.',
+            'nome.required' => 'O campo nome é obrigatório',
+            'data_de_nascimento.required' => 'O campo data de nascimento é obrigatório',
+            'sexo.required' => 'O campo sexo é obrigatório',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('cadastro')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $pessoa->save();
+
+
+        return redirect('/tabela')->with('success', 'Pessoa cadastrada com sucesso!');
     }
 
-    public function show ($id) 
+    public function show($id)
     {
         $pessoa = Pessoa::all();
         $pessoa = Pessoa::find($id);
-        return view ('pessoa/show', ['pessoa' => $pessoa]);
+        return view('pessoa/show', ['pessoa' => $pessoa]);
     }
 
 
 
-    public function edit($id) 
+    public function edit($id)
     {
         $pessoa = Pessoa::find($id);
         return view('pessoa/edit', ['pessoa' => $pessoa]);
@@ -110,25 +111,23 @@ class PessoaController extends Controller
 
     public function update(Request $request, $id)
     {
-        
-      $pessoa = Pessoa::findOrFail($id);
-      $pessoa->update([
-          'nome' => $request -> nome,
-          'data_de_nascimento' => $request -> data_de_nascimento,
-          'cpf' => $request -> cpf,
-          'sexo' => $request -> sexo,
-          'cidade' => $request -> cidade,
-          'bairro' => $request -> bairro,
-          'rua' => $request -> rua,
-          'numero' => $request -> numero,
-          'complemento' => $request -> complemento,
 
-      ]);
-        
+        $pessoa = Pessoa::findOrFail($id);
+        $pessoa->update([
+            'nome' => $request->nome,
+            'data_de_nascimento' => $request->data_de_nascimento,
+            'cpf' => $request->cpf,
+            'sexo' => $request->sexo,
+            'cidade' => $request->cidade,
+            'bairro' => $request->bairro,
+            'rua' => $request->rua,
+            'numero' => $request->numero,
+            'complemento' => $request->complemento,
 
-        return redirect('tabela')->with('success','Pessoa editada com sucesso!');
-      
-        
+        ]);
+
+
+        return redirect('tabela')->with('success', 'Pessoa editada com sucesso!');
     }
 
     public function withValidator($validator)
@@ -144,22 +143,22 @@ class PessoaController extends Controller
     {
         $pessoa = Pessoa::find($id);
         $pessoa->delete();
-        return redirect('tabela')->with('warning','Pessoa excluida com sucesso!');
+        return redirect('tabela')->with('warning', 'Pessoa excluida com sucesso!');
     }
 
-    public function search() {
+    public function search()
+    {
         $search = $_GET['query'];
-        $pessoa = Pessoa::where('nome', 'LIKE', '%' .$search. '%')->orWhere('cpf', 'LIKE', '%' .$search. '%')
-       ->orWhere('data_de_nascimento', 'LIKE', '%' .$search. '%')
-       ->orWhere('cpf', 'LIKE', '%' .$search. '%')
-       ->orWhere('sexo', 'LIKE', '%' .$search. '%')
-       ->orWhere('cidade', 'LIKE', '%' .$search. '%')
-       ->orWhere('bairro', 'LIKE', '%' .$search. '%')
-       ->orWhere('rua', 'LIKE', '%' .$search. '%')
-       ->orWhere('numero', 'LIKE', '%' .$search. '%')
-       ->orWhere('complemento', 'LIKE', '%' .$search. '%')->get();
+        $pessoa = Pessoa::where('nome', 'LIKE', '%' . $search . '%')->orWhere('cpf', 'LIKE', '%' . $search . '%')
+            ->orWhere('data_de_nascimento', 'LIKE', '%' . $search . '%')
+            ->orWhere('cpf', 'LIKE', '%' . $search . '%')
+            ->orWhere('sexo', 'LIKE', '%' . $search . '%')
+            ->orWhere('cidade', 'LIKE', '%' . $search . '%')
+            ->orWhere('bairro', 'LIKE', '%' . $search . '%')
+            ->orWhere('rua', 'LIKE', '%' . $search . '%')
+            ->orWhere('numero', 'LIKE', '%' . $search . '%')
+            ->orWhere('complemento', 'LIKE', '%' . $search . '%')->get();
 
         return view('pessoa/tabela', compact('pessoa'));
     }
-
 }

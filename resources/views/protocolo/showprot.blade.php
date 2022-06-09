@@ -27,15 +27,15 @@
                     <tr>
                         
                         <label for="nome" class="control-label">Nome: *</label>
-                        <input type="text" name="pessoa_id"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->pessoa->nome }}"><br>
+                        <input type="text" name="pessoa_id"  style="background-color: #fffaface; font-size:1.5em"  class="form-control" readonly value =" {{ $protocolo->pessoa->nome }}"><br>
                         <label for="descricao" class="control-label">Descrição: *</label>
-                        <input type="text" name="descricao"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->descricao }}"><br>
+                        <input type="text" name="descricao"  style="background-color: #fffaface; font-size:1.5em"  class="form-control" readonly value =" {{ $protocolo->descricao }}"><br>
                         <label for="data" class="control-label">Data: *</label>
-                        <input type="text" name="data"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->data }}"><br>
+                        <input type="text" name="data"  style="background-color: #fffaface; font-size:1.5em"  class="form-control" readonly  value =" {{ $protocolo->data }}"><br>
                         <label for="prazo" class="control-label">Prazo: *</label>
-                        <input type="text" name="prazo"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->prazo }}"><br>
+                        <input type="text" name="prazo"  style="background-color: #fffaface; font-size:1.5em"  class="form-control" readonly   value =" {{ $protocolo->prazo }}"><br>
                         <label for="departamento" class="control-label">Departamento: *</label>
-                        <input type="text" name="departamento_id"  style="background-color: #fffaface" class="form-control"  value =" {{ $protocolo->departamento->departamento }}"><br>
+                        <input type="text" name="departamento_id"  style="background-color: #fffaface; font-size:1.5em"  class="form-control" readonly value =" {{ $protocolo->departamento->departamento }}"><br>
         
                     
                       

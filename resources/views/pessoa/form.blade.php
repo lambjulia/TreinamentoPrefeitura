@@ -1,8 +1,9 @@
+@extends('layouts.master')
+@section('title','Prefeitura')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 
 <form action="/store" method="POST" class="form-horizontal" id="formProduto">
     @csrf               
@@ -139,12 +140,6 @@
     </div>
 
 </form>
-
-</div>
-</div>
-</div>
-
-
 <script>
 
     $(document).ready(function(){
@@ -153,4 +148,6 @@
   $('#cpf').mask('000.000.000-00', {reverse: true});
 
   });
-    </script>
+</script>
+
+@endsection

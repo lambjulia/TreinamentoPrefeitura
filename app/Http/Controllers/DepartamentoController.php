@@ -61,7 +61,7 @@ class DepartamentoController extends Controller
 
 
 
-        return redirect('/')->with('success', 'Protocolo cadastrado com sucesso!');
+        return redirect('tabeladepart')->with('success', 'Departamento cadastrado com sucesso!');
     }
 
     public function tabela()
@@ -85,24 +85,17 @@ class DepartamentoController extends Controller
 
     public function save(Request $request, $id)
     {
-
-
-        $atribuir = new Atribuir();
+        $departamento_user = new Departamento_user();
         $departamento = Departamento::find($id);
         $usuario_id = $request->input('user_id');
         $usuario = User::find($usuario_id);
 
-
-        //$limit = Departamento_user::where('user_id', $departamento->user_id)
-        //->where('departamento_id', $departamento->id)->exists();
         $limit = $departamento->user()->where('user_id', $usuario_id)->exists();
-        error_log('teste' . $limit);
         if ($limit) {
-            error_log('teste2');
-            return redirect()->back();
+            return redirect()->back()->with('warning', 'Usuário já esta atribuído!');
         } else {
             $departamento->user()->attach($usuario);
-            return redirect()->back();
+            return redirect('tabeladepart')->with('success', 'Usuário atribuído com sucesso!');
         }
     }
 }

@@ -1,72 +1,29 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<h1> Projeto TreinamentoPrefeitura </h1>
+<h4> Esse projeto foi desenvolvido após eu passar na seleção para estagiária para a prefeitura de São Leopoldo como um treinamento.</h4>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<h3>Sobre o projeto:</h3>
 
-## About Laravel
+<p>Neste projeto de treinamento foi utilizado o modelo de layout de padrão da prefeitura, junto com o projeto TestePrefeitura que fiz para conseguir a vaga.</p>
+<p>Apliquei o sistema do teste no layout da prefeitura e fiz melhorias solicitadas.</p>
+<p>O sistema possui cadastro de pessoas, de protocolos vinculados a essas pessoas cadastradas, cadastro de usuários com nível de acesso, cadastro de departamentos e auditoria.</p>
+<p>No cadastro de uma pessoa consta o nome, data de nascimento, CPF, sexo, cidade, bairro, rua, número e complemento.</p>
+<p>No cadastro de protocolo consta a descrição do protocolo, a data, o prazo, uma dropdown list com as pessoas cadastradas e uma dropdown list com os departamentos para ser vinculado um protocolo não pode ser registrado sem uma pessoa e um departamento para ser vinculado.</p>
+<p>No cadastro de usuários consta nome, email, CPF, nível de usuário e senha.</p>
+<p>No cadastro de departamento consta o nome e após o cadastro, pode ser vinculado um usuário a este departamento.</p>
+<p>O sistema possui tabelas listando as pessoas cadastradas e os protocolos, onde se pode ser os cadastros, editar e excluir. Na tabela de protocolos o usuário só ve os protocolos que estejam vinculados a departamentos que o usuário também esta. Nas tabelas tem uma barra de pesquisa.</p>
+<p>O sistema tem limitação com login, onde só o usuário de nível mais alto pode cadastrar os outros.</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h3>Como instalar o projeto:</h3>
+<p>A .env já esta no projeto.</p>
+<p>Você pode baixar o projeto ou usar o comando:</p>
+<p>git clone https://github.com/lambjulia/TreinamentoPrefeitura.git</p>
+<p>Crie um banco com o nome 'TreinamentoPrefeitura'</p>
+<p>No terminal do projeto rode os seguintes comandos:</p>
+<p>composer install</p>
+<p>php artisan migrate --seed</p>
+<p>php artisan serve</p>
+<p>E abra o servidor no navegador com http://127.0.0.1:8000/</p>
+<p>Entre com o login:</p>
+<p>email: julilamb2000@hotmail.com</p>
+<p>senha: 12345678</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
